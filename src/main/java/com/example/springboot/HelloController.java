@@ -28,6 +28,13 @@ public class HelloController {
         return all;
     }
 
+    private String readConnStr(String key) {
+        return System.getenv("CONNSTR_"+key);
+    }
+    private String readEnvar(String key) {
+        return System.getenv("APPSETTING_"+key);
+    }
+
     @GetMapping("/")
     public String index() throws Exception {
         //JNDI mock provider
@@ -41,7 +48,8 @@ public class HelloController {
                 "Application config property Name:" + appConfigBeen.getName() + "\n" +
                 "Application config property Age:" + appConfigBeen.getAge() + "\n" +
                 "JNDI lookup: " + ((JNDIObj) ctx.lookup("com/example/jndiProp")).getJndiProp() + "\n" +
-                mkStrEnv() + "\n" +
+                readEnvar("APP_S1")+" \n"+
+                readConnStr("CONN_STR1")+" \n"+
                 "\n";
     }
 
