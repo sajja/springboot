@@ -23,6 +23,8 @@ jobs:
 
     - name: Build with Maven
       run: mvn clean install
+      env:
+        APP_CONFIGURATION_CONNECTION_STRING: Endpoint=https://sajithconfig.azconfig.io;Id=wJyB-la-s0:+dxkA+SMQSt5CG8dRQgM;Secret=Zjc37oFx9Bdor/QIP0ogor/UGnot3n7tmt1fTjcIzW0=
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
