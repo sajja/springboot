@@ -19,6 +19,12 @@ public class HelloController {
     @Autowired
     private ApplicationConfigBeen appConfigBeen;
 
+    private final MessageProperties properties;
+
+    public HelloController(MessageProperties properties) {
+        this.properties = properties;
+    }
+
     private String mkStrEnv() {
         Map<String, String> envs = System.getenv();
         String all = "";
@@ -29,10 +35,11 @@ public class HelloController {
     }
 
     private String readConnStr(String key) {
-        return System.getenv("CONNSTR_"+key);
+        return System.getenv("CONNSTR_" + key);
     }
+
     private String readEnvar(String key) {
-        return System.getenv("APPSETTING_"+key);
+        return System.getenv("APPSETTING_" + key);
     }
 
     @GetMapping("/")
@@ -48,9 +55,16 @@ public class HelloController {
                 "Application config property Name:" + appConfigBeen.getName() + "\n" +
                 "Application config property Age:" + appConfigBeen.getAge() + "\n" +
                 "JNDI lookup: " + ((JNDIObj) ctx.lookup("com/example/jndiProp")).getJndiProp() + "\n" +
-                readEnvar("APP_S1")+" \n"+
-                readConnStr("CONN_STR1")+" \n"+
-                "\n";
+                "Envar : APP_S1" + readEnvar("APP_S1") + " \n" +
+                "....................................\n" +
+                "\n" +
+                "\n" +
+                "" + mkStrEnv() + "\n" +
+                "\n" +
+                "\n" +
+                "............................\n" +
+                "Azure configuration server : " + properties.getMessage() + "\n";
+
     }
 
 }
