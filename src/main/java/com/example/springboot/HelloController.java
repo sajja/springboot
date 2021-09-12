@@ -12,6 +12,9 @@ import javax.naming.CompositeName;
 import javax.naming.Context;
 import javax.naming.InvalidNameException;
 import javax.naming.Name;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Map;
 
 @RestController
@@ -49,6 +52,10 @@ public class HelloController {
         builder.activate();
         JndiTemplate jndiTemplate = new JndiTemplate();
         Context ctx = jndiTemplate.getContext();
+        File f = new File("/yolo/azure_test");
+        FileWriter fw = new FileWriter(f);
+        fw.write("Hello world");
+        fw.flush();
 
         ctx.bind("com/example/jndiProp", new JNDIObj());
         return "Greetings from Spring Boot! ..........\n" +
