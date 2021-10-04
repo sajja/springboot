@@ -1,12 +1,14 @@
 package com.example.springboot;
 
+import com.example.springboot.domain.Todo;
+import com.example.springboot.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.mock.jndi.SimpleNamingContextBuilder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.naming.CompositeName;
 import javax.naming.Context;
@@ -15,12 +17,16 @@ import javax.naming.Name;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 public class HelloController {
     @Autowired
     private ApplicationConfigBeen appConfigBeen;
+
+    @Autowired
+    private TodoRepository todoRepository;
 
     private final MessageProperties properties;
 
@@ -53,9 +59,9 @@ public class HelloController {
         JndiTemplate jndiTemplate = new JndiTemplate();
         Context ctx = jndiTemplate.getContext();
         File f = new File("/yolo/azure_test");
-        FileWriter fw = new FileWriter(f);
+/*        FileWriter fw = new FileWriter(f);
         fw.write("Hello world");
-        fw.flush();
+        fw.flush();*/
 
         ctx.bind("com/example/jndiProp", new JNDIObj());
         return "Greetings from Spring Boot! ..........\n" +
@@ -74,4 +80,14 @@ public class HelloController {
 
     }
 
+    @GetMapping("/list")
+    public List<Todo> getTodoList() {
+        return todoRepository.findAll();
+    }
+
+    @PostMapping("/todo")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Todo createTodo(@RequestBody Todo todo)   {
+        return todoRepository.save(todo);
+    }
 }
