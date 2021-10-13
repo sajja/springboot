@@ -17,6 +17,7 @@ import javax.naming.Name;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -133,7 +134,9 @@ public class HelloController {
         new Thread(execute("8")).start();
         new Thread(execute("8")).start();
         new Thread(execute("8")).start();
-        return todoRepository.findAll();
+        boolean x= true;
+        while (x){}
+        return Arrays.asList(new Todo(),new Todo());
     }
 
     @PostMapping("/todo")
