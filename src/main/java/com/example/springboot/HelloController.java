@@ -28,8 +28,8 @@ public class HelloController {
     @Autowired
     private ApplicationConfigBeen appConfigBeen;
 
-    @Autowired
-    private TodoRepository todoRepository;
+//    @Autowired
+//    private TodoRepository todoRepository;
 
     private final MessageProperties properties;
 
@@ -61,7 +61,7 @@ public class HelloController {
         builder.activate();
         JndiTemplate jndiTemplate = new JndiTemplate();
         Context ctx = jndiTemplate.getContext();
-        File f = new File("/yolo/azure_test");
+//        File f = new File("/yolo/azure_test");
 /*        FileWriter fw = new FileWriter(f);
         fw.write("Hello world");
         fw.flush();*/
@@ -83,65 +83,14 @@ public class HelloController {
 
     }
 
-    private Runnable execute(String id) {
-        return new Runnable() {
-            @Override
-            public void run() {
-                for (; ; ) {
-                    System.out.println("---->" + id);
-                }
-            }
-        };
-    }
-
     @GetMapping("/list")
     public List<Todo> getTodoList() {
-        ExecutorService executor = Executors.newFixedThreadPool(10);
-        new Thread(execute("1")).start();
-        new Thread(execute("2")).start();
-        new Thread(execute("3")).start();
-        new Thread(execute("4")).start();
-        new Thread(execute("5")).start();
-        new Thread(execute("6")).start();
-        new Thread(execute("7")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        new Thread(execute("8")).start();
-        boolean x= true;
-        while (x){}
         return Arrays.asList(new Todo(),new Todo());
     }
 
-    @PostMapping("/todo")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Todo createTodo(@RequestBody Todo todo) {
-        return todoRepository.save(todo);
-    }
+//    @PostMapping("/todo")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Todo createTodo(@RequestBody Todo todo) {
+//        return todoRepository.save(todo);
+//    }
 }
